@@ -36,3 +36,21 @@
     transform: rotate(360deg);
   }
 }
+
+.articles {
+  justify-content: space-between;
+  flex-wrap: wrap;
+  display: flex;
+  /* text-align: center; */
+  list-style: none;
+}
+.lists {
+  margin: 20px;
+  border: 1px solid black;
+  width: 300px;
+  padding: 20px;
+}
+
+li {
+  padding: 2px;
+}
