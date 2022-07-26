@@ -4,8 +4,8 @@ import axios from "axios";
 
 function Topic() {
   const [isLoading, setIsLoading] = useState(true);
-
   const [articleTopics, setArticleTopics] = useState([]);
+
   useEffect(() => {
     setIsLoading(true);
     axios.get("https://nc-news-pa.herokuapp.com/api/topics").then((res) => {
@@ -21,7 +21,7 @@ function Topic() {
         {articleTopics.map((topic) => {
           return (
             <Link to={`topics/${topic.slug}`} key={topic.slug}>
-              {topic.slug}
+              {`${topic.slug[0].toUpperCase()}${topic.slug.slice(1)}`}
             </Link>
           );
         })}

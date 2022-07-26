@@ -6,6 +6,7 @@ import Navigation from "./components/Navigation";
 import Topic from "./components/Topic";
 
 import "./App.css";
+import SingleArticle from "./components/SingleArticle";
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path={`/topics/:single_topic`} element={<Topic />} />
+          <Route path="/articles/:article_id" element={<SingleArticle />} />
         </Routes>
       </div>
     </BrowserRouter>
