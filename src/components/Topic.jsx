@@ -1,9 +1,11 @@
+import { useParams } from "react-router-dom";
 import { useState, useEffect } from "react";
 
 import axios from "axios";
 
-function Home() {
-  const [articlesList, setArticlesList] = useState([]);
+function Topic() {
+  const { single_topic } = useParams();
+  const [topicList, setTopicList] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(true);
   const [errorMessage, setErrorMessage] = useState("");
@@ -12,7 +14,10 @@ function Home() {
     axios
       .get("https://nc-news-pa.herokuapp.com/api/articles")
       .then((res) => {
-        setArticlesList(res.data.articles);
+        const filteredTopic = res.data.articles.filter(
+          (article) => article.topic === single_topic
+        );
+        setTopicList(filteredTopic);
         setIsLoading(false);
         setError(false);
       })
@@ -21,18 +26,18 @@ function Home() {
         setIsLoading(false);
         setError(false);
       });
-  });
+  }, [single_topic]);
 
   if (isLoading) {
-    return <p>Loading Articles....</p>;
+    return <p>Loading Topic....</p>;
   } else if (error) {
     return <p>{errorMessage}</p>;
   } else {
     return (
       <div>
-        <h3>{articlesList.length} Articles</h3>
+        <h3>{topicList.length} Topics</h3>
         <ul className="articles">
-          {articlesList.map((article) => {
+          {topicList.map((article) => {
             return (
               <div key={`${article.article_id}div`} className="lists">
                 <li key={article.article_id} id={article.article_id}>
@@ -49,4 +54,4 @@ function Home() {
   }
 }
 
-export default Home;
+export default Topic;
