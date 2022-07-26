@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+
 import axios from "axios";
 
 function Home() {
@@ -20,7 +21,7 @@ function Home() {
         setIsLoading(false);
         setError(false);
       });
-  }, [articlesList]);
+  });
 
   if (isLoading) {
     return <p>Loading Articles....</p>;
@@ -35,9 +36,9 @@ function Home() {
             return (
               <div key={`${article.article_id}div`} className="lists">
                 <li key={article.article_id} id={article.article_id}>
-                  {article.title}
-                  {article.author}
-                  {article.votes}
+                  <p>{article.title}</p>
+                  <p>{article.author}</p>
+                  <p>{article.votes}</p>
                 </li>
               </div>
             );

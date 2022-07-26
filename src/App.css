@@ -37,7 +37,6 @@
   }
 }
 
-
 .articles {
   justify-content: space-between;
   flex-wrap: wrap;
@@ -52,6 +51,6 @@
   padding: 20px;
 }
 
-li {
-  padding: 2px;
-
+a {
+  margin: 0 5px 0 5px;
+}
