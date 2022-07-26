@@ -35,7 +35,7 @@ function Topic() {
   } else {
     return (
       <div>
-        <h3>{topicArticlesList.length} Topics</h3>
+        <h3>{topicArticlesList.length} Articles</h3>
         <ul className="articles">
           {topicArticlesList.map((article) => {
             return (
