@@ -5,26 +5,26 @@ import axios from "axios";
 
 function Topic() {
   const { single_topic } = useParams();
-  const [topicList, setTopicList] = useState([]);
+  const [topicArticlesList, setTopicArticlesList] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
-  const [error, setError] = useState(true);
+  const [error, setError] = useState(null);
   const [errorMessage, setErrorMessage] = useState("");
 
   useEffect(() => {
+    setIsLoading(true);
     axios
-      .get("https://nc-news-pa.herokuapp.com/api/articles")
+      .get(
+        `https://nc-news-pa.herokuapp.com/api/articles?topic=${single_topic}`
+      )
       .then((res) => {
-        const filteredTopic = res.data.articles.filter(
-          (article) => article.topic === single_topic
-        );
-        setTopicList(filteredTopic);
+        setTopicArticlesList(res.data.articles);
         setIsLoading(false);
         setError(false);
       })
       .catch((err) => {
+        setError(true);
         setErrorMessage(err.message);
         setIsLoading(false);
-        setError(false);
       });
   }, [single_topic]);
 
@@ -35,17 +35,19 @@ function Topic() {
   } else {
     return (
       <div>
-        <h3>{topicList.length} Topics</h3>
+        <h3>{topicArticlesList.length} Topics</h3>
         <ul className="articles">
-          {topicList.map((article) => {
+          {topicArticlesList.map((article) => {
             return (
-              <div key={`${article.article_id}div`} className="lists">
-                <li key={article.article_id} id={article.article_id}>
-                  <p>{article.title}</p>
-                  <p>{article.author}</p>
-                  <p>{article.votes}</p>
-                </li>
-              </div>
+              <li
+                key={article.article_id}
+                id={article.article_id}
+                className="lists"
+              >
+                <p>{article.title}</p>
+                <p>{article.author}</p>
+                <p>{article.votes}</p>
+              </li>
             );
           })}
         </ul>
