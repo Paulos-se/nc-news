@@ -1,14 +1,16 @@
 import { useState, useEffect } from "react";
 
+import { Link } from "react-router-dom";
 import axios from "axios";
 
 function Home() {
   const [articlesList, setArticlesList] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
-  const [error, setError] = useState(true);
+  const [error, setError] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
 
   useEffect(() => {
+    setIsLoading(true);
     axios
       .get("https://nc-news-pa.herokuapp.com/api/articles")
       .then((res) => {
@@ -21,7 +23,7 @@ function Home() {
         setIsLoading(false);
         setError(false);
       });
-  });
+  }, [setIsLoading]);
 
   if (isLoading) {
     return <p>Loading Articles....</p>;
@@ -36,7 +38,9 @@ function Home() {
             return (
               <div key={`${article.article_id}div`} className="lists">
                 <li key={article.article_id} id={article.article_id}>
-                  <p>{article.title}</p>
+                  <Link to={`articles/${article.article_id}`}>
+                    {article.title}
+                  </Link>
                   <p>{article.author}</p>
                   <p>{article.votes}</p>
                 </li>
