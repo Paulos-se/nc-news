@@ -48,7 +48,6 @@ function Topic() {
                   {article.title}
                 </Link>
                 <p>{article.author}</p>
-                <p>{article.votes}</p>
               </li>
             );
           })}
