@@ -36,15 +36,17 @@ function Home() {
         <ul className="articles">
           {articlesList.map((article) => {
             return (
-              <div key={`${article.article_id}div`} className="lists">
-                <li key={article.article_id} id={article.article_id}>
-                  <Link to={`articles/${article.article_id}`}>
-                    {article.title}
-                  </Link>
-                  <p>{article.author}</p>
-                  <p>{article.votes}</p>
-                </li>
-              </div>
+              <li
+                key={article.article_id}
+                id={article.article_id}
+                className="lists"
+              >
+                <Link to={`articles/${article.article_id}`}>
+                  {article.title}
+                </Link>
+                <p>{article.author}</p>
+                <p>{article.votes}</p>
+              </li>
             );
           })}
         </ul>

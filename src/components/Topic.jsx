@@ -1,4 +1,4 @@
-import { useParams } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
 import { useState, useEffect } from "react";
 
 import axios from "axios";
@@ -44,7 +44,9 @@ function Topic() {
                 id={article.article_id}
                 className="lists"
               >
-                <p>{article.title}</p>
+                <Link to={`/articles/${article.article_id}`}>
+                  {article.title}
+                </Link>
                 <p>{article.author}</p>
                 <p>{article.votes}</p>
               </li>
