@@ -8,10 +8,22 @@ function UpdateVote({ vote, setVote, setArticle, article }) {
   const [unLikeDisable, unLikeSetDisable] = useState(false);
   function upVote(e) {
     if (liked) {
+      axios
+        .patch(
+          `https://nc-news-pa.herokuapp.com/api/articles/${article.article_id}`,
+          { inc_votes: -1 }
+        )
+        .then((res) => {
+          setVote(res.data.votes);
+        });
+
+      setVote((current) => {
+        let newVote = current - 1;
+
+        return newVote;
+      });
+      setLiked(false);
       unLikeSetDisable(false);
-      setUnLiked(false);
-      downVote(e);
-      e.preventDefault();
     } else {
       axios
         .patch(
@@ -33,10 +45,21 @@ function UpdateVote({ vote, setVote, setArticle, article }) {
 
   function downVote(e) {
     if (unLiked) {
+      axios
+        .patch(
+          `https://nc-news-pa.herokuapp.com/api/articles/${article.article_id}`,
+          { inc_votes: 1 }
+        )
+        .then((res) => {
+          setVote(res.data.votes);
+        });
+
+      setVote((current) => {
+        let newVote = current + 1;
+        return newVote;
+      });
+      setUnLiked(false);
       likeSetDisable(false);
-      setLiked(false);
-      upVote(e);
-      e.preventDefault();
     } else {
       axios
         .patch(
