@@ -4,8 +4,11 @@ import { useState } from "react";
 function UpdateVote({ vote, setVote, setArticle, article }) {
   const [liked, setLiked] = useState(false);
   const [unLiked, setUnLiked] = useState(false);
+  const [likeDisable, likeSetDisable] = useState(false);
+  const [unLikeDisable, unLikeSetDisable] = useState(false);
   function upVote(e) {
     if (liked) {
+      unLikeSetDisable(false);
       e.preventDefault();
     } else {
       axios
@@ -22,11 +25,13 @@ function UpdateVote({ vote, setVote, setArticle, article }) {
         return newVote;
       });
       setLiked(true);
+      unLikeSetDisable(true);
     }
   }
 
   function downVote(e) {
     if (unLiked) {
+      likeSetDisable(false);
       e.preventDefault();
     } else {
       axios
@@ -44,13 +49,26 @@ function UpdateVote({ vote, setVote, setArticle, article }) {
         return newVote;
       });
       setUnLiked(true);
+      likeSetDisable(true);
     }
   }
 
   return (
     <div>
-      <button onClick={upVote}>👍</button>
-      <button onClick={downVote}>👎</button>
+      <button
+        onClick={upVote}
+        disabled={likeDisable}
+        className="btn btn-outline-primary"
+      >
+        👍
+      </button>
+      <button
+        onClick={downVote}
+        disabled={unLikeDisable}
+        class="btn btn-outline-danger"
+      >
+        👎
+      </button>
     </div>
   );
 }
