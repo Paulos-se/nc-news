@@ -15,58 +15,39 @@ function UpdateVote({ vote, setVote, setArticle, article }) {
       return newVote;
     });
   }
-  function upVote(e) {
-    if (liked) {
-      axios
-        .patch(
-          `https://nc-news-pa.herokuapp.com/api/articles/${article.article_id}`,
-          { inc_votes: -1 }
-        )
-        .then((res) => {
-          setVote(res.data.votes);
-        });
 
+  function patch(singleVote) {
+    axios
+      .patch(
+        `https://nc-news-pa.herokuapp.com/api/articles/${article.article_id}`,
+        { inc_votes: singleVote }
+      )
+      .then((res) => {
+        setVote(res.data.votes);
+      });
+  }
+  function likeArticle() {
+    if (liked) {
+      patch(-singleVote);
       voteArticle(-singleVote);
       setLiked(false);
       unLikeSetDisable(false);
     } else {
-      axios
-        .patch(
-          `https://nc-news-pa.herokuapp.com/api/articles/${article.article_id}`,
-          { inc_votes: 1 }
-        )
-        .then((res) => {
-          setVote(res.data.votes);
-        });
-
+      patch(singleVote);
       voteArticle(singleVote);
       setLiked(true);
       unLikeSetDisable(true);
     }
   }
 
-  function downVote(e) {
+  function unlikeArticle() {
     if (unLiked) {
-      axios
-        .patch(
-          `https://nc-news-pa.herokuapp.com/api/articles/${article.article_id}`,
-          { inc_votes: 1 }
-        )
-        .then((res) => {
-          setVote(res.data.votes);
-        });
+      patch(singleVote);
       voteArticle(singleVote);
       setUnLiked(false);
       likeSetDisable(false);
     } else {
-      axios
-        .patch(
-          `https://nc-news-pa.herokuapp.com/api/articles/${article.article_id}`,
-          { inc_votes: -1 }
-        )
-        .then((res) => {
-          setVote(res.data.votes);
-        });
+      patch(-singleVote);
       voteArticle(-singleVote);
       setUnLiked(true);
       likeSetDisable(true);
@@ -76,14 +57,14 @@ function UpdateVote({ vote, setVote, setArticle, article }) {
   return (
     <div>
       <button
-        onClick={upVote}
+        onClick={likeArticle}
         disabled={likeDisable}
         className="btn btn-primary"
       >
         👍
       </button>
       <button
-        onClick={downVote}
+        onClick={unlikeArticle}
         disabled={unLikeDisable}
         className="btn btn-danger"
       >

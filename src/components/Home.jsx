@@ -26,7 +26,7 @@ function Home() {
   }, [setIsLoading]);
 
   if (isLoading) {
-    return <p>Loading Articles....</p>;
+    return <p className="loading">Loading Articles....</p>;
   } else if (error) {
     return <p>{errorMessage}</p>;
   } else {

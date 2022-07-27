@@ -30,15 +30,18 @@
 
 .header {
   background-color: RGB(1, 51, 101);
-  height: 50px;
+  height: 40px;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   font-size: calc(10px + 2vmin);
+  margin-bottom: 10px;
+}
+.header-link {
+  background-color: RGB(1, 51, 101);
   color: white;
 }
-
 .articles {
   justify-content: space-between;
   flex-wrap: wrap;
@@ -51,7 +54,8 @@
   /* border: 1px solid black; */
   width: 300px;
   padding: 20px;
-  background-color: RGB(243, 243, 243);
+  background-color: RGB(238, 242, 245);
+  box-shadow: 10px 10px RGB(1, 51, 101);
 }
 
 a {
@@ -72,9 +76,11 @@ nav {
   background-color: red;
 }
 
-h3 {
+h3,
+h2 {
   text-align: center;
   margin: 5px;
+  color: RGB(1, 51, 101);
 }
 
 .comments {
@@ -99,11 +105,20 @@ h3 {
 }
 
 button {
-  width: 100px;
+  width: 80px;
   height: 50px;
   margin: 20px;
 }
 
 .article-p {
-  background-color: RGB(243, 243, 243);
+  background-color: RGB(238, 242, 245);
+}
+
+.loading {
+  display: inline-block;
+  margin-left: 700px;
+}
+
+.body {
+  text-align: justify;
 }

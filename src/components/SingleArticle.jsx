@@ -35,12 +35,17 @@ function SingleArticle() {
     return (
       <main className="single-article">
         <h2>{article.title}</h2>
+        <p className="body">{article.body}</p>
         <p>Article ID {article.article_id}</p>
         <p> Author {article.author}</p>
-        <p>Vote {articleVote}</p>
-        <p>Article topic{article.topic}</p>
-        <p>Created at {article.created_at}</p>
+        <p>Article topic {article.topic}</p>
+        <p>
+          Created at {article.created_at.slice(0, 10)}
+          {"  "}
+          {article.created_at.slice(11, 19)}
+        </p>
         <p>Comments {article.comment_count}</p>
+        <p>Vote {articleVote}</p>
         <UpdateVote
           vote={articleVote}
           setVote={setArticleVote}

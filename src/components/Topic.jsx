@@ -29,7 +29,7 @@ function Topic() {
   }, [single_topic]);
 
   if (isLoading) {
-    return <p>Loading Topic....</p>;
+    return <p className="loading">Loading....</p>;
   } else if (error) {
     return <p>{errorMessage}</p>;
   } else {
