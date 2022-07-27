@@ -26,7 +26,7 @@ function SingleArticle() {
         setIsLoading(false);
         setError(false);
       });
-  }, [article_id, isLoading]);
+  }, [article_id]);
   if (isLoading) {
     return <p>Loading Articles....</p>;
   } else if (error) {
@@ -37,7 +37,7 @@ function SingleArticle() {
         <h2>{article.title}</h2>
         <p>Article ID{article.article_id}</p>
         <p> Author {article.author}</p>
-        <p>{articleVote}</p>
+        <p>Vote {articleVote}</p>
         <p>Article topic{article.topic}</p>
         <p>Created at{article.created_at}</p>
         <p>Comments{article.comment_count}</p>

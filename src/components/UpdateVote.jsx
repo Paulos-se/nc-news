@@ -6,6 +6,15 @@ function UpdateVote({ vote, setVote, setArticle, article }) {
   const [unLiked, setUnLiked] = useState(false);
   const [likeDisable, likeSetDisable] = useState(false);
   const [unLikeDisable, unLikeSetDisable] = useState(false);
+  const singleVote = 1;
+
+  function voteArticle(vote) {
+    setVote((current) => {
+      let newVote = current + vote;
+
+      return newVote;
+    });
+  }
   function upVote(e) {
     if (liked) {
       axios
@@ -17,11 +26,7 @@ function UpdateVote({ vote, setVote, setArticle, article }) {
           setVote(res.data.votes);
         });
 
-      setVote((current) => {
-        let newVote = current - 1;
-
-        return newVote;
-      });
+      voteArticle(-singleVote);
       setLiked(false);
       unLikeSetDisable(false);
     } else {
@@ -34,10 +39,7 @@ function UpdateVote({ vote, setVote, setArticle, article }) {
           setVote(res.data.votes);
         });
 
-      setVote((current) => {
-        let newVote = current + 1;
-        return newVote;
-      });
+      voteArticle(singleVote);
       setLiked(true);
       unLikeSetDisable(true);
     }
@@ -53,11 +55,7 @@ function UpdateVote({ vote, setVote, setArticle, article }) {
         .then((res) => {
           setVote(res.data.votes);
         });
-
-      setVote((current) => {
-        let newVote = current + 1;
-        return newVote;
-      });
+      voteArticle(singleVote);
       setUnLiked(false);
       likeSetDisable(false);
     } else {
@@ -69,12 +67,7 @@ function UpdateVote({ vote, setVote, setArticle, article }) {
         .then((res) => {
           setVote(res.data.votes);
         });
-
-      setVote((current) => {
-        let newVote = current - 1;
-
-        return newVote;
-      });
+      voteArticle(-singleVote);
       setUnLiked(true);
       likeSetDisable(true);
     }
@@ -85,14 +78,14 @@ function UpdateVote({ vote, setVote, setArticle, article }) {
       <button
         onClick={upVote}
         disabled={likeDisable}
-        className="btn btn-outline-primary"
+        className="btn btn-primary"
       >
         👍
       </button>
       <button
         onClick={downVote}
         disabled={unLikeDisable}
-        className="btn btn-outline-danger"
+        className="btn btn-danger"
       >
         👎
       </button>
