@@ -10,6 +10,7 @@ function UpdateVote({ vote, setVote, setArticle, article }) {
     if (liked) {
       unLikeSetDisable(false);
       setUnLiked(false);
+      downVote(e);
       e.preventDefault();
     } else {
       axios
@@ -34,6 +35,7 @@ function UpdateVote({ vote, setVote, setArticle, article }) {
     if (unLiked) {
       likeSetDisable(false);
       setLiked(false);
+      upVote(e);
       e.preventDefault();
     } else {
       axios
