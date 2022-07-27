@@ -41,10 +41,13 @@ function Home() {
                 id={article.article_id}
                 className="lists"
               >
-                <Link to={`articles/${article.article_id}`}>
+                <Link
+                  to={`articles/${article.article_id}`}
+                  className="article-p"
+                >
                   {article.title}
                 </Link>
-                <p>{article.author}</p>
+                <p className="article-p">{article.author}</p>
               </li>
             );
           })}

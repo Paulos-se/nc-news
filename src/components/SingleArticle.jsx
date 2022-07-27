@@ -33,14 +33,14 @@ function SingleArticle() {
     return <p>{errorMessage}</p>;
   } else {
     return (
-      <main>
+      <main className="single-article">
         <h2>{article.title}</h2>
-        <p>Article ID{article.article_id}</p>
+        <p>Article ID {article.article_id}</p>
         <p> Author {article.author}</p>
         <p>Vote {articleVote}</p>
         <p>Article topic{article.topic}</p>
-        <p>Created at{article.created_at}</p>
-        <p>Comments{article.comment_count}</p>
+        <p>Created at {article.created_at}</p>
+        <p>Comments {article.comment_count}</p>
         <UpdateVote
           vote={articleVote}
           setVote={setArticleVote}
