@@ -9,6 +9,7 @@ function UpdateVote({ vote, setVote, setArticle, article }) {
   function upVote(e) {
     if (liked) {
       unLikeSetDisable(false);
+      setUnLiked(false);
       e.preventDefault();
     } else {
       axios
@@ -32,6 +33,7 @@ function UpdateVote({ vote, setVote, setArticle, article }) {
   function downVote(e) {
     if (unLiked) {
       likeSetDisable(false);
+      setLiked(false);
       e.preventDefault();
     } else {
       axios
@@ -65,7 +67,7 @@ function UpdateVote({ vote, setVote, setArticle, article }) {
       <button
         onClick={downVote}
         disabled={unLikeDisable}
-        class="btn btn-outline-danger"
+        className="btn btn-outline-danger"
       >
         👎
       </button>
