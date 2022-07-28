@@ -36,13 +36,15 @@ function NewComment({ article, comments, setComments }) {
       })
       .catch((error) => {
         setError(true);
-        setErrorMessage(error.message);
+        setErrorMessage(error.response.data.message);
       });
 
     setComments((current) => {
       const newCommentToPost = { ...commentToPost };
       newCommentToPost["comment_id"] = new Date().getMilliseconds();
-      const newComments = [newCommentToPost, ...current];
+      newCommentToPost["votes"] = 0;
+      newCommentToPost["created_at"] = new Date().toISOString();
+      const newComments = [...current, newCommentToPost];
       return newComments;
     });
     setFormDisable(true);
@@ -58,7 +60,7 @@ function NewComment({ article, comments, setComments }) {
         ) : (
           <form onSubmit={handleSubmit}>
             <p>Signed in as {user.username}</p>
-            <label>
+            {/* <label>
               Username:
               <input
                 onChange={handleInput}
@@ -67,7 +69,7 @@ function NewComment({ article, comments, setComments }) {
                 name="author"
                 required
               />
-            </label>
+            </label> */}
             <label>
               Comment
               <input
