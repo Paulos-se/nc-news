@@ -134,3 +134,21 @@ button {
 #avatar-p {
   margin: 20px;
 }
+
+input {
+  margin: 20px;
+}
+.input-comment {
+  margin: 20px;
+  width: 400px;
+  height: 200px;
+}
+
+form {
+  margin-left: 400px;
+  margin-top: -300px;
+  border: black solid 1px;
+  width: fit-content;
+  margin-bottom: 50px;
+  padding: 20px;
+}

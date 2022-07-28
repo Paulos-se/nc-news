@@ -9,6 +9,7 @@ function Comments({ article }) {
   const [errorMessage, setErrorMessage] = useState("");
 
   useEffect(() => {
+    setIsLoading(true);
     axios
       .get(
         `https://nc-news-pa.herokuapp.com/api/articles/${article.article_id}/comments`
@@ -21,6 +22,7 @@ function Comments({ article }) {
       .catch((err) => {
         setError(true);
         setErrorMessage(err.message);
+        setIsLoading(false);
       });
   }, [article.article_id]);
   if (isLoading) {
@@ -30,31 +32,29 @@ function Comments({ article }) {
   }
   return (
     <section>
+      <NewComment
+        article={article}
+        comments={comments}
+        setComments={setComments}
+      />
       <ul className="articles">
         {comments.map((comment) => {
           return (
             <li key={comment.comment_id} className="lists">
-              <p className="article-p">
-                {comment.comment_id}-{comment.body}
-              </p>
+              <p className="article-p">{comment.body}</p>
 
-              <p className="article-p">
+              {/* <p className="article-p">
                 Created at {comment.created_at.slice(0, 10)}
                 {"  "}
                 {comment.created_at.slice(11, 19)}
-              </p>
-
+              </p> */}
+              <p>{comment.created_at}</p>
               <p className="article-p">Author {comment.author}</p>
               <p className="article-p">Vote {comment.votes}</p>
             </li>
           );
         })}
       </ul>
-      <NewComment
-        article={article}
-        comments={comments}
-        setComments={setComments}
-      />
     </section>
   );
 }
