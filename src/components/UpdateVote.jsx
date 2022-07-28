@@ -6,6 +6,8 @@ function UpdateVote({ vote, setVote, setArticle, article }) {
   const [unLiked, setUnLiked] = useState(false);
   const [likeDisable, likeSetDisable] = useState(false);
   const [unLikeDisable, unLikeSetDisable] = useState(false);
+  const [error, setError] = useState(false);
+  const [errorMessage, setErrorMessage] = useState("");
   const singleVote = 1;
 
   function voteArticle(vote) {
@@ -24,6 +26,11 @@ function UpdateVote({ vote, setVote, setArticle, article }) {
       )
       .then((res) => {
         setVote(res.data.votes);
+        setError(false);
+      })
+      .catch((err) => {
+        setError(true);
+        setErrorMessage(err.message);
       });
   }
   function likeArticle() {
@@ -53,25 +60,28 @@ function UpdateVote({ vote, setVote, setArticle, article }) {
       likeSetDisable(true);
     }
   }
-
-  return (
-    <div>
-      <button
-        onClick={likeArticle}
-        disabled={likeDisable}
-        className="btn btn-primary"
-      >
-        👍
-      </button>
-      <button
-        onClick={unlikeArticle}
-        disabled={unLikeDisable}
-        className="btn btn-danger"
-      >
-        👎
-      </button>
-    </div>
-  );
+  if (error) {
+    <p>{errorMessage}</p>;
+  } else {
+    return (
+      <div>
+        <button
+          onClick={likeArticle}
+          disabled={likeDisable}
+          className="btn btn-primary"
+        >
+          👍
+        </button>
+        <button
+          onClick={unlikeArticle}
+          disabled={unLikeDisable}
+          className="btn btn-danger"
+        >
+          👎
+        </button>
+      </div>
+    );
+  }
 }
 
 export default UpdateVote;

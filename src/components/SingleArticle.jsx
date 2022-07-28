@@ -19,12 +19,13 @@ function SingleArticle() {
       .then((res) => {
         setArticle(res.data.article);
         setArticleVote(res.data.article.votes);
-        isLoading(false);
-      })
-      .catch((err) => {
-        setErrorMessage(err.message);
         setIsLoading(false);
         setError(false);
+      })
+      .catch((err) => {
+        setError(true);
+        setErrorMessage(err.message);
+        setIsLoading(false);
       });
   }, [article_id]);
   if (isLoading) {

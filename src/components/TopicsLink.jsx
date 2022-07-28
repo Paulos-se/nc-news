@@ -18,7 +18,7 @@ function Topic() {
   } else {
     return (
       <nav>
-        <Link to="/" className="nav-links">
+        <Link to="/" className="nav-links home-link">
           Home
         </Link>
         {articleTopics.map((topic) => {
