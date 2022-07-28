@@ -130,3 +130,7 @@ button {
 .body {
   text-align: justify;
 }
+
+#avatar-p {
+  margin: 20px;
+}

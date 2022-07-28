@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
+import NewComment from "./NewComment";
 
 function Comments({ article }) {
   const [comments, setComments] = useState([]);
@@ -49,6 +50,11 @@ function Comments({ article }) {
           );
         })}
       </ul>
+      <NewComment
+        article={article}
+        comments={comments}
+        setComments={setComments}
+      />
     </section>
   );
 }
