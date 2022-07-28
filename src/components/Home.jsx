@@ -1,13 +1,15 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 
 import { Link } from "react-router-dom";
 import axios from "axios";
+import { UserContext } from "./User";
 
 function Home() {
   const [articlesList, setArticlesList] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
+  const { user, setUser } = useContext(UserContext);
 
   useEffect(() => {
     setIsLoading(true);
@@ -32,6 +34,10 @@ function Home() {
   } else {
     return (
       <div>
+        <p id="avatar-p">
+          <img id="avatar" src={user.avatar_url} alt="avatar" />
+          Signed in as {user.username}
+        </p>
         <h3>{articlesList.length} Articles</h3>
         <ul className="articles">
           {articlesList.map((article) => {

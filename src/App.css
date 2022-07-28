@@ -130,3 +130,35 @@ button {
 .body {
   text-align: justify;
 }
+
+#avatar-p {
+  margin: 20px;
+}
+
+input {
+  margin: 20px;
+}
+.input-comment {
+  margin: 20px;
+  width: 400px;
+  height: 200px;
+}
+
+form {
+  margin-left: 400px;
+  margin-top: -300px;
+  border: black solid 1px;
+  width: fit-content;
+  margin-bottom: 50px;
+  padding: 20px;
+}
+
+.comment-posted {
+  margin: 30px;
+}
+
+/* <p className="article-p">
+                Created at {comment.created_at.slice(0, 10)}
+                {"  "}
+                {comment.created_at.slice(11, 19)}
+            </p>  */

@@ -1,10 +1,12 @@
-import { useParams } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
 
 import axios from "axios";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import UpdateVote from "./UpdateVote";
 import Comments from "./Comments";
+
+import { UserContext } from "./User";
 
 function SingleArticle() {
   const { article_id } = useParams();
@@ -13,6 +15,7 @@ function SingleArticle() {
   const [error, setError] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
   const [articleVote, setArticleVote] = useState(0);
+  const { user, setUser } = useContext(UserContext);
 
   useEffect(() => {
     axios
@@ -36,7 +39,12 @@ function SingleArticle() {
   } else {
     return (
       <main className="single-article">
+        <p id="avatar-p">
+          <img id="avatar" src={user.avatar_url} alt="avatar" />
+          Signed in as {user.username}
+        </p>
         <h2>{article.title}</h2>
+
         <p className="body">{article.body}</p>
         <p>Article ID {article.article_id}</p>
         <p> Author {article.author}</p>

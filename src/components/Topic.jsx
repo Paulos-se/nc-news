@@ -1,6 +1,9 @@
 import { useParams, Link } from "react-router-dom";
 import { useState, useEffect } from "react";
 
+import { useContext } from "react";
+import { UserContext } from "../components/User";
+
 import axios from "axios";
 
 function Topic() {
@@ -9,6 +12,7 @@ function Topic() {
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
   const [errorMessage, setErrorMessage] = useState("");
+  const { user, setUser } = useContext(UserContext);
 
   useEffect(() => {
     setIsLoading(true);
@@ -35,6 +39,10 @@ function Topic() {
   } else {
     return (
       <div>
+        <p id="avatar-p">
+          <img id="avatar" src={user.avatar_url} alt="avatar" />
+          Signed in as {user.username}
+        </p>
         <h3>{topicArticlesList.length} Articles</h3>
         <ul className="articles">
           {topicArticlesList.map((article) => {
