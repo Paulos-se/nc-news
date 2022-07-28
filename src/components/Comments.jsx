@@ -33,12 +33,18 @@ function Comments({ article }) {
         {comments.map((comment) => {
           return (
             <li key={comment.comment_id} className="lists">
-              <p>
+              <p className="article-p">
                 {comment.comment_id}-{comment.body}
               </p>
-              <p>{comment.created_at}</p>
-              <p>{comment.author}</p>
-              <p>{comment.vote}</p>
+
+              <p className="article-p">
+                Created at {comment.created_at.slice(0, 10)}
+                {"  "}
+                {comment.created_at.slice(11, 19)}
+              </p>
+
+              <p className="article-p">Author {comment.author}</p>
+              <p className="article-p">Vote {comment.votes}</p>
             </li>
           );
         })}
