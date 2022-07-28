@@ -60,16 +60,6 @@ function NewComment({ article, comments, setComments }) {
         ) : (
           <form onSubmit={handleSubmit}>
             <p>Signed in as {user.username}</p>
-            {/* <label>
-              Username:
-              <input
-                onChange={handleInput}
-                value={commentToPost.author}
-                type="text"
-                name="author"
-                required
-              />
-            </label> */}
             <label>
               Comment
               <input
