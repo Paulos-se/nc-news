@@ -1,67 +1,50 @@
-import { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
 import axios from "axios";
-import { UserContext } from "../components/User";
-import { useContext } from "react";
 
-function NewComment(article) {
-  const { user, setUser } = useContext(UserContext);
-  const [commentToPost, setCommentToPost] = useState({
-    author: "hankish",
-    body: "",
-  });
+function Comments({ article }) {
+  const [comments, setComments] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState(false);
+  const [errorMessage, setErrorMessage] = useState("");
 
-  function handleInput(e) {
-    const { name, value } = e.target;
-
-    setCommentToPost({
-      ...commentToPost,
-      [name]: value,
-    });
-  }
-  function handleSubmit(e) {
-    e.preventDefault();
-    console.log(commentToPost, "<<< im comment to post");
-    console.log(e.target, "<<< im e.target");
-
+  useEffect(() => {
     axios
-      .post(
-        `https://nc-news-pa.herokuapp.com/api/articles/${article.article}/comments`,
-        commentToPost
+      .get(
+        `https://nc-news-pa.herokuapp.com/api/articles/${article.article_id}/comments`
       )
-      .then((response) => {
-        console.log(response);
+      .then((res) => {
+        setComments(res.data.comments);
+        setError(false);
+        setIsLoading(false);
       })
-      .catch((error) => {
-        console.log(error);
+      .catch((err) => {
+        setError(true);
+        setErrorMessage(err.message);
       });
+  }, [article.article_id]);
+  if (isLoading) {
+    return <p>Loading ....</p>;
+  } else if (error) {
+    return <p>errorMessage</p>;
   }
-
   return (
-    <div>
-      <p>Signed in as {user.username}</p>
-      <form onSubmit={handleSubmit}>
-        <label>
-          Name:
-          <input
-            onChange={handleInput}
-            value={commentToPost.author}
-            type="text"
-            name="author"
-          />
-        </label>
-        <label>
-          Body
-          <input
-            onChange={handleInput}
-            value={commentToPost.body}
-            type="text"
-            name="body"
-          />
-        </label>
-        <button type="submit">Submit</button>
-      </form>
-    </div>
+    <section>
+      <ul className="articles">
+        {comments.map((comment) => {
+          return (
+            <li key={comment.comment_id} className="lists">
+              <p>
+                {comment.comment_id}-{comment.body}
+              </p>
+              <p>{comment.created_at}</p>
+              <p>{comment.author}</p>
+              <p>{comment.vote}</p>
+            </li>
+          );
+        })}
+      </ul>
+    </section>
   );
 }
 
-export default NewComment;
+export default Comments;
