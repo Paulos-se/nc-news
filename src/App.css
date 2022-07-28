@@ -152,3 +152,13 @@ form {
   margin-bottom: 50px;
   padding: 20px;
 }
+
+.comment-posted {
+  margin: 30px;
+}
+
+/* <p className="article-p">
+                Created at {comment.created_at.slice(0, 10)}
+                {"  "}
+                {comment.created_at.slice(11, 19)}
+            </p>  */

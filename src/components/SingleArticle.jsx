@@ -1,4 +1,4 @@
-import { useParams } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
 
 import axios from "axios";
 
@@ -44,6 +44,7 @@ function SingleArticle() {
           Signed in as {user.username}
         </p>
         <h2>{article.title}</h2>
+
         <p className="body">{article.body}</p>
         <p>Article ID {article.article_id}</p>
         <p> Author {article.author}</p>

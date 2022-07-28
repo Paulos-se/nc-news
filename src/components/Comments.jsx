@@ -37,24 +37,22 @@ function Comments({ article }) {
         comments={comments}
         setComments={setComments}
       />
-      <ul className="articles">
-        {comments.map((comment) => {
-          return (
-            <li key={comment.comment_id} className="lists">
-              <p className="article-p">{comment.body}</p>
-
-              {/* <p className="article-p">
-                Created at {comment.created_at.slice(0, 10)}
-                {"  "}
-                {comment.created_at.slice(11, 19)}
-              </p> */}
-              <p>{comment.created_at}</p>
-              <p className="article-p">Author {comment.author}</p>
-              <p className="article-p">Vote {comment.votes}</p>
-            </li>
-          );
-        })}
-      </ul>
+      {comments.length === 0 ? (
+        <p>No comments</p>
+      ) : (
+        <ul className="articles">
+          {comments.map((comment) => {
+            return (
+              <li key={comment.comment_id} className="lists">
+                <p className="article-p">{comment.body}</p>
+                <p className="article-p">{comment.created_at}</p>
+                <p className="article-p">Author {comment.author}</p>
+                <p className="article-p">Vote {comment.votes}</p>
+              </li>
+            );
+          })}
+        </ul>
+      )}
     </section>
   );
 }

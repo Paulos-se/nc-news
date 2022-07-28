@@ -6,11 +6,13 @@ import { useContext } from "react";
 function NewComment({ article, comments, setComments }) {
   const [error, setError] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
+  const [formDisable, setFormDisable] = useState(false);
   const { user, setUser } = useContext(UserContext);
-  const [commentToPost, setCommentToPost] = useState({
+  const intialPost = {
     author: user.username,
     body: "",
-  });
+  };
+  const [commentToPost, setCommentToPost] = useState(intialPost);
 
   function handleInput(e) {
     const { name, value } = e.target;
@@ -30,6 +32,7 @@ function NewComment({ article, comments, setComments }) {
       )
       .then(() => {
         setError(false);
+        setFormDisable(false);
       })
       .catch((error) => {
         setError(true);
@@ -38,40 +41,53 @@ function NewComment({ article, comments, setComments }) {
 
     setComments((current) => {
       const newCommentToPost = { ...commentToPost };
+      newCommentToPost["comment_id"] = new Date().getMilliseconds();
       const newComments = [newCommentToPost, ...current];
       return newComments;
     });
+    setFormDisable(true);
+    setCommentToPost(intialPost);
   }
   if (error) {
-    return <p>errorMessage</p>;
+    return <p>{errorMessage}</p>;
   } else {
     return (
       <div>
-        <form onSubmit={handleSubmit}>
-          <p>Signed in as {user.username}</p>
-          <label>
-            Username:
-            <input
-              onChange={handleInput}
-              value={commentToPost.author}
-              type="text"
-              name="author"
-            />
-          </label>
-          <label>
-            Comment
-            <input
-              className="input-comment"
-              onChange={handleInput}
-              value={commentToPost.body}
-              type="text"
-              name="body"
-            />
-          </label>
-          <button type="submit" className="btn btn-primary">
-            Submit
-          </button>
-        </form>
+        {formDisable ? (
+          <h2 className="comment-posted">Comment post successful</h2>
+        ) : (
+          <form onSubmit={handleSubmit}>
+            <p>Signed in as {user.username}</p>
+            <label>
+              Username:
+              <input
+                onChange={handleInput}
+                value={commentToPost.author}
+                type="text"
+                name="author"
+                required
+              />
+            </label>
+            <label>
+              Comment
+              <input
+                className="input-comment"
+                onChange={handleInput}
+                value={commentToPost.body}
+                type="text"
+                name="body"
+                required
+              />
+            </label>
+            <button
+              type="submit"
+              className="btn btn-primary"
+              disabled={formDisable}
+            >
+              Submit
+            </button>
+          </form>
+        )}
       </div>
     );
   }
