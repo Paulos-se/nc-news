@@ -4,6 +4,7 @@ import axios from "axios";
 
 import { useState, useEffect } from "react";
 import UpdateVote from "./UpdateVote";
+import Comments from "./Comments";
 
 function SingleArticle() {
   const { article_id } = useParams();
@@ -53,6 +54,7 @@ function SingleArticle() {
           article={article}
           setArticle={setArticle}
         />
+        <Comments article={article} />
       </main>
     );
   }
