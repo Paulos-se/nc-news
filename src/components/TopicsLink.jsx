@@ -17,15 +17,22 @@ function Topic() {
     return <p>Loading Topic....</p>;
   } else {
     return (
-      <div>
+      <nav>
+        <Link to="/" className="nav-links home-link">
+          Home
+        </Link>
         {articleTopics.map((topic) => {
           return (
-            <Link to={`topics/${topic.slug}`} key={topic.slug}>
+            <Link
+              to={`topics/${topic.slug}`}
+              key={topic.slug}
+              className="nav-links"
+            >
               {`${topic.slug[0].toUpperCase()}${topic.slug.slice(1)}`}
             </Link>
           );
         })}
-      </div>
+      </nav>
     );
   }
 }

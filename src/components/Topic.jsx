@@ -29,7 +29,7 @@ function Topic() {
   }, [single_topic]);
 
   if (isLoading) {
-    return <p>Loading Topic....</p>;
+    return <p className="loading">Loading....</p>;
   } else if (error) {
     return <p>{errorMessage}</p>;
   } else {
@@ -44,11 +44,13 @@ function Topic() {
                 id={article.article_id}
                 className="lists"
               >
-                <Link to={`/articles/${article.article_id}`}>
+                <Link
+                  to={`/articles/${article.article_id}`}
+                  className="article-p"
+                >
                   {article.title}
                 </Link>
-                <p>{article.author}</p>
-                <p>{article.votes}</p>
+                <p className="article-p">{article.author}</p>
               </li>
             );
           })}
