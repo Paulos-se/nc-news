@@ -3,6 +3,7 @@ import { useState, useEffect, useContext } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import { UserContext } from "./User";
+import SortBy from "./SortBy";
 
 function Home() {
   const [articlesList, setArticlesList] = useState([]);
@@ -10,11 +11,18 @@ function Home() {
   const [error, setError] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
   const { user, setUser } = useContext(UserContext);
+  const [category, setCategory] = useState("created_at");
+  const [order, setOrder] = useState("DESC");
 
   useEffect(() => {
     setIsLoading(true);
     axios
-      .get("https://nc-news-pa.herokuapp.com/api/articles")
+      .get("https://nc-news-pa.herokuapp.com/api/articles", {
+        params: {
+          sort_by: category,
+          order: order,
+        },
+      })
       .then((res) => {
         setArticlesList(res.data.articles);
         setIsLoading(false);
@@ -25,7 +33,7 @@ function Home() {
         setIsLoading(false);
         setError(false);
       });
-  }, [setIsLoading]);
+  }, [category, order]);
 
   if (isLoading) {
     return <p className="loading">Loading Articles....</p>;
@@ -34,6 +42,7 @@ function Home() {
   } else {
     return (
       <div>
+        <SortBy setCategory={setCategory} setOrder={setOrder} />
         <p id="avatar-p">
           <img id="avatar" src={user.avatar_url} alt="avatar" />
           Signed in as {user.username}

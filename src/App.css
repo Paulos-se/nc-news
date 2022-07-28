@@ -132,7 +132,7 @@ button {
 }
 
 #avatar-p {
-  margin: 20px;
+  margin-left: 1000px;
 }
 
 input {
@@ -162,3 +162,9 @@ form {
                 {"  "}
                 {comment.created_at.slice(11, 19)}
             </p>  */
+
+select {
+  display: inline-block;
+
+  width: 200px;
+}
