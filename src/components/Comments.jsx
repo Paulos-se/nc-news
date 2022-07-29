@@ -4,14 +4,15 @@ import axios from "axios";
 import NewComment from "./NewComment";
 import { UserContext } from "./User";
 import Delete from "./Delete";
+import Error from "./Error";
 
 import { useContext } from "react";
 
 function Comments({ article }) {
   const [comments, setComments] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
-  const [error, setError] = useState(false);
-  const [errorMessage, setErrorMessage] = useState("");
+  const [error, setError] = useState(null);
+
   const { user, setUser } = useContext(UserContext);
 
   useEffect(() => {
@@ -22,19 +23,22 @@ function Comments({ article }) {
       )
       .then((res) => {
         setComments(res.data.comments);
-        setError(false);
+        setError(null);
         setIsLoading(false);
       })
       .catch((err) => {
-        setError(true);
-        setErrorMessage(err.message);
+        setError({
+          status: err.response.status,
+          message: err.response.data.message,
+        });
+
         setIsLoading(false);
       });
   }, [article.article_id, comments.length]);
   if (isLoading) {
     return <p>Loading ....</p>;
   } else if (error) {
-    return <p>errorMessage</p>;
+    return <Error status={error.status} message={error.message} />;
   }
   return (
     <section>

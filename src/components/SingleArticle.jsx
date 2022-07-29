@@ -1,8 +1,10 @@
-import { useParams, Link } from "react-router-dom";
+import { useParams } from "react-router-dom";
 
 import axios from "axios";
 
 import { useState, useEffect, useContext } from "react";
+
+import Error from "./Error";
 import UpdateVote from "./UpdateVote";
 import Comments from "./Comments";
 
@@ -12,8 +14,8 @@ function SingleArticle() {
   const { article_id } = useParams();
   const [article, setArticle] = useState({});
   const [isLoading, setIsLoading] = useState(true);
-  const [error, setError] = useState(false);
-  const [errorMessage, setErrorMessage] = useState("");
+  const [error, setError] = useState(null);
+
   const [articleVote, setArticleVote] = useState(0);
   const { user, setUser } = useContext(UserContext);
 
@@ -24,18 +26,20 @@ function SingleArticle() {
         setArticle(res.data.article);
         setArticleVote(res.data.article.votes);
         setIsLoading(false);
-        setError(false);
+        setError(null);
       })
       .catch((err) => {
-        setError(true);
-        setErrorMessage(err.message);
+        setError({
+          status: err.response.status,
+          message: err.response.data.message,
+        });
         setIsLoading(false);
       });
   }, [article_id]);
   if (isLoading) {
     return <p>Loading Article....</p>;
   } else if (error) {
-    return <p>{errorMessage}</p>;
+    return <Error status={error.status} message={error.message} />;
   } else {
     return (
       <main className="single-article">

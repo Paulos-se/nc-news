@@ -1,19 +1,16 @@
 import { useParams, Link } from "react-router-dom";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 
-import { useContext } from "react";
-
+import Error from "./Error";
 import { UserContext } from "../components/User";
 
 import axios from "axios";
-import SortBy from "./SortBy";
 
 function Topic() {
   const { single_topic } = useParams();
   const [topicArticlesList, setTopicArticlesList] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
-  const [errorMessage, setErrorMessage] = useState("");
   const { user, setUser } = useContext(UserContext);
 
   useEffect(() => {
@@ -25,11 +22,13 @@ function Topic() {
       .then((res) => {
         setTopicArticlesList(res.data.articles);
         setIsLoading(false);
-        setError(false);
+        setError(null);
       })
       .catch((err) => {
-        setError(true);
-        setErrorMessage(err.message);
+        setError({
+          status: err.response.status,
+          message: err.response.data.message,
+        });
         setIsLoading(false);
       });
   }, [single_topic]);
@@ -37,7 +36,7 @@ function Topic() {
   if (isLoading) {
     return <p className="loading">Loading....</p>;
   } else if (error) {
-    return <p>{errorMessage}</p>;
+    return <Error status={error.status} message={error.message} />;
   } else {
     return (
       <div>

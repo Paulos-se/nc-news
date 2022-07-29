@@ -1,11 +1,13 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
+
 import axios from "axios";
+
 import { UserContext } from "../components/User";
-import { useContext } from "react";
+import Error from "./Error";
 
 function NewComment({ article, comments, setComments }) {
-  const [error, setError] = useState(false);
-  const [errorMessage, setErrorMessage] = useState("");
+  const [error, setError] = useState(null);
+
   const [formDisable, setFormDisable] = useState(false);
   const { user, setUser } = useContext(UserContext);
   const intialPost = {
@@ -31,12 +33,14 @@ function NewComment({ article, comments, setComments }) {
         commentToPost
       )
       .then(() => {
-        setError(false);
+        setError(null);
         setFormDisable(false);
       })
-      .catch((error) => {
-        setError(true);
-        setErrorMessage(error.response.data.message);
+      .catch((err) => {
+        setError({
+          status: err.response.status,
+          message: err.response.data.message,
+        });
       });
 
     setComments((current) => {
@@ -51,7 +55,7 @@ function NewComment({ article, comments, setComments }) {
     setCommentToPost(intialPost);
   }
   if (error) {
-    return <p>{errorMessage}</p>;
+    return <Error status={error.status} message={error.message} />;
   } else {
     return (
       <div>

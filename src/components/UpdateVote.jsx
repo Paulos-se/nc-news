@@ -1,13 +1,15 @@
 import axios from "axios";
+
 import { useState } from "react";
+import Error from "./Error";
 
 function UpdateVote({ vote, setVote, setArticle, article }) {
   const [liked, setLiked] = useState(false);
   const [unLiked, setUnLiked] = useState(false);
   const [likeDisable, likeSetDisable] = useState(false);
   const [unLikeDisable, unLikeSetDisable] = useState(false);
-  const [error, setError] = useState(false);
-  const [errorMessage, setErrorMessage] = useState("");
+  const [error, setError] = useState(null);
+
   const singleVote = 1;
 
   function voteArticle(vote) {
@@ -26,11 +28,13 @@ function UpdateVote({ vote, setVote, setArticle, article }) {
       )
       .then((res) => {
         setVote(res.data.votes);
-        setError(false);
+        setError(null);
       })
       .catch((err) => {
-        setError(true);
-        setErrorMessage(err.message);
+        setError({
+          status: err.response.status,
+          message: err.response.data.message,
+        });
       });
   }
   function likeArticle() {
@@ -61,7 +65,7 @@ function UpdateVote({ vote, setVote, setArticle, article }) {
     }
   }
   if (error) {
-    <p>{errorMessage}</p>;
+    return <Error status={error.status} message={error.message} />;
   } else {
     return (
       <div>

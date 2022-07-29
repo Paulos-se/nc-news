@@ -2,20 +2,24 @@ import axios from "axios";
 
 import { useState } from "react";
 
+import Error from "./Error";
+
 function Delete({ comment, setComments }) {
-  const [error, setError] = useState(false);
-  const [errorMessage, setErrorMessage] = useState("");
+  const [error, setError] = useState(null);
+
   function deleteComment() {
     axios
       .delete(
         `https://nc-news-pa.herokuapp.com/api/comments/${comment.comment_id}`
       )
       .then(() => {
-        setError(false);
+        setError(null);
       })
       .catch((err) => {
-        setError(true);
-        setErrorMessage(err.message);
+        setError({
+          status: err.response.status,
+          message: err.response.data.message,
+        });
       });
 
     setComments((current) => {
@@ -27,7 +31,7 @@ function Delete({ comment, setComments }) {
     });
   }
   if (error) {
-    return <p>errorMessage</p>;
+    return <Error status={error.status} message={error.message} />;
   }
   return (
     <button onClick={deleteComment} className="btn btn-danger">
