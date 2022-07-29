@@ -1,41 +1,49 @@
-import { useParams, Link } from "react-router-dom";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 
-import { useContext } from "react";
-
-import { UserContext } from "../components/User";
-
+import { Link, useSearchParams } from "react-router-dom";
 import axios from "axios";
+import { UserContext } from "./User";
 import SortBy from "./SortBy";
 
-function Topic() {
-  const { single_topic } = useParams();
-  const [topicArticlesList, setTopicArticlesList] = useState([]);
+function Articles() {
+  const [articlesList, setArticlesList] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
-  const [error, setError] = useState(null);
+  const [error, setError] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
   const { user, setUser } = useContext(UserContext);
+
+  const [query, setQuery] = useState({
+    sort_by: "created_at",
+    order: "DESC",
+  });
+  const [search, setSearch] = useSearchParams();
+
+  const sort_by = search.get("sort_by");
+  const order = search.get("order");
 
   useEffect(() => {
     setIsLoading(true);
     axios
-      .get(
-        `https://nc-news-pa.herokuapp.com/api/articles?topic=${single_topic}`
-      )
+      .get("https://nc-news-pa.herokuapp.com/api/articles", {
+        params: {
+          sort_by: sort_by,
+          order: order,
+        },
+      })
       .then((res) => {
-        setTopicArticlesList(res.data.articles);
+        setArticlesList(res.data.articles);
         setIsLoading(false);
         setError(false);
       })
       .catch((err) => {
-        setError(true);
         setErrorMessage(err.message);
         setIsLoading(false);
+        setError(false);
       });
-  }, [single_topic]);
+  }, [search]);
 
   if (isLoading) {
-    return <p className="loading">Loading....</p>;
+    return <p className="loading">Loading Articles....</p>;
   } else if (error) {
     return <p>{errorMessage}</p>;
   } else {
@@ -45,10 +53,10 @@ function Topic() {
           <img id="avatar" src={user.avatar_url} alt="avatar" />
           Signed in as {user.username}
         </p>
-
-        <h3>{topicArticlesList.length} Articles</h3>
+        <SortBy query={query} setQuery={setQuery} setSearch={setSearch} />
+        <h3>{articlesList.length} Articles</h3>
         <ul className="articles">
-          {topicArticlesList.map((article) => {
+          {articlesList.map((article) => {
             return (
               <li
                 key={article.article_id}
@@ -56,7 +64,7 @@ function Topic() {
                 className="lists"
               >
                 <Link
-                  to={`/articles/${article.article_id}`}
+                  to={`articles/${article.article_id}`}
                   className="article-p"
                 >
                   {article.title}
@@ -71,4 +79,4 @@ function Topic() {
   }
 }
 
-export default Topic;
+export default Articles;

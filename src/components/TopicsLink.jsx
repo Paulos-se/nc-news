@@ -21,6 +21,9 @@ function Topic() {
         <Link to="/" className="nav-links home-link">
           Home
         </Link>
+        <Link to="/articles" className="nav-links">
+          All articles
+        </Link>
         {articleTopics.map((topic) => {
           return (
             <Link

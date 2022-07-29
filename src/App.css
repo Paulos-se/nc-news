@@ -80,7 +80,7 @@ nav {
   display: flex;
   flex-wrap: wrap;
   row-gap: 20px;
-  column-gap: 250px;
+  column-gap: 150px;
 }
 
 h3,
@@ -132,7 +132,8 @@ button {
 }
 
 #avatar-p {
-  margin-left: 1000px;
+  margin-top: 30px;
+  margin-left: 1100px;
 }
 
 input {
@@ -144,7 +145,7 @@ input {
   height: 200px;
 }
 
-form {
+.comment-form {
   margin-left: 400px;
   margin-top: -300px;
   border: black solid 1px;
@@ -157,14 +158,96 @@ form {
   margin: 30px;
 }
 
-/* <p className="article-p">
-                Created at {comment.created_at.slice(0, 10)}
-                {"  "}
-                {comment.created_at.slice(11, 19)}
-            </p>  */
+label {
+  margin-left: 20px;
+  margin-right: 10px;
+}
 
-select {
-  display: inline-block;
+.params {
+  width: 50px;
+  height: 50px;
+  border: 1px solid black;
 
-  width: 200px;
+  display: inline;
+  text-align: center;
+}
+
+.ticker-wrapper-h {
+  display: flex;
+  position: relative;
+  overflow: hidden;
+  background-color: red;
+}
+
+.ticker-wrapper-h .heading {
+  background-color: RGB(1, 51, 101);
+  color: #fff;
+  padding: 5px 10px;
+  flex: 0 0 auto;
+  z-index: 1000;
+}
+.ticker-wrapper-h .heading:after {
+  content: "";
+  position: absolute;
+  top: 0;
+  border-left: 20px solid RGB(1, 51, 101);
+  border-top: 17px solid transparent;
+  border-bottom: 15px solid transparent;
+}
+
+.news-ticker-h {
+  display: flex;
+  margin: 0;
+  padding: 0;
+  padding-left: 90%;
+  z-index: 999;
+  background-color: red;
+
+  animation-iteration-count: infinite;
+  animation-timing-function: linear;
+  animation-name: tic-h;
+  animation-duration: 50s;
+}
+.news-ticker-h:hover {
+  animation-play-state: paused;
+}
+
+.news-ticker-h li {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  white-space: nowrap;
+  padding-left: 20px;
+}
+
+.news-ticker-h li {
+  color: white;
+  font-weight: bold;
+  background-color: red;
+  margin: 0 150px 0 150px;
+}
+
+@keyframes tic-h {
+  0% {
+    -webkit-transform: translate3d(0, 0, 0);
+    transform: translate3d(0, 0, 0);
+    visibility: visible;
+  }
+  100% {
+    -webkit-transform: translate3d(-100%, 0, 0);
+    transform: translate3d(-100%, 0, 0);
+  }
+}
+
+#ticker {
+  margin-top: 300px;
+}
+
+#nc {
+  background-color: red;
+  color: white;
+}
+
+.first-heading {
+  margin: 200px 600px;
 }
