@@ -33,7 +33,7 @@ function App() {
             <Route path={"*"} element={<Error />} />
             <Route path="/articles" element={<Articles />} />
             <Route path={`/topics/:single_topic`} element={<Topic />} />
-            <Route path="/articles/:article_id" element={<SingleArticle />} />
+            <Route path={"/articles/:article_id"} element={<SingleArticle />} />
           </Routes>
         </div>
       </UserContext.Provider>

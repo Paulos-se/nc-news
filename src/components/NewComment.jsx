@@ -64,23 +64,22 @@ function NewComment({ article, comments, setComments }) {
         ) : (
           <form onSubmit={handleSubmit} className="comment-form">
             <p>Signed in as {user.username}</p>
-            <label>
-              Comment
-              <input
-                className="input-comment"
-                onChange={handleInput}
-                value={commentToPost.body}
-                type="text"
-                name="body"
-                required
-              />
-            </label>
+
+            <textarea
+              placeholder="Comment here ..."
+              className="input-comment"
+              onChange={handleInput}
+              value={commentToPost.body}
+              type="text"
+              name="body"
+              required
+            />
             <button
               type="submit"
-              className="btn btn-primary"
+              className="btn btn-primary comment-button"
               disabled={formDisable}
             >
-              Submit
+              Post Comment!
             </button>
           </form>
         )}
