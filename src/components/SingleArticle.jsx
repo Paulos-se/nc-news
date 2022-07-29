@@ -33,7 +33,7 @@ function SingleArticle() {
       });
   }, [article_id]);
   if (isLoading) {
-    return <p>Loading Articles....</p>;
+    return <p>Loading Article....</p>;
   } else if (error) {
     return <p>{errorMessage}</p>;
   } else {

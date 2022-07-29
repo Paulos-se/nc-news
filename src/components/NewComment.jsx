@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import axios from "axios";
 import { UserContext } from "../components/User";
 import { useContext } from "react";
@@ -58,7 +58,7 @@ function NewComment({ article, comments, setComments }) {
         {formDisable ? (
           <h2 className="comment-posted">Comment post successful</h2>
         ) : (
-          <form onSubmit={handleSubmit}>
+          <form onSubmit={handleSubmit} className="comment-form">
             <p>Signed in as {user.username}</p>
             <label>
               Comment

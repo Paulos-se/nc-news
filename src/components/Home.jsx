@@ -1,66 +1,50 @@
-import { useState, useEffect, useContext } from "react";
-
 import { Link } from "react-router-dom";
-import axios from "axios";
-import { UserContext } from "./User";
 
 function Home() {
-  const [articlesList, setArticlesList] = useState([]);
-  const [isLoading, setIsLoading] = useState(true);
-  const [error, setError] = useState(false);
-  const [errorMessage, setErrorMessage] = useState("");
-  const { user, setUser } = useContext(UserContext);
+  return (
+    <section>
+      <Link to="/articles">
+        <h1 className="first-heading">
+          <span id="nc">NC</span> <span id="news">NEWS</span>
+        </h1>
+      </Link>
 
-  useEffect(() => {
-    setIsLoading(true);
-    axios
-      .get("https://nc-news-pa.herokuapp.com/api/articles")
-      .then((res) => {
-        setArticlesList(res.data.articles);
-        setIsLoading(false);
-        setError(false);
-      })
-      .catch((err) => {
-        setErrorMessage(err.message);
-        setIsLoading(false);
-        setError(false);
-      });
-  }, [setIsLoading]);
+      <div className="ticker-wrapper-h">
+        <div className="heading">NC NEWS</div>
 
-  if (isLoading) {
-    return <p className="loading">Loading Articles....</p>;
-  } else if (error) {
-    return <p>{errorMessage}</p>;
-  } else {
-    return (
-      <div>
-        <p id="avatar-p">
-          <img id="avatar" src={user.avatar_url} alt="avatar" />
-          Signed in as {user.username}
-        </p>
-        <h3>{articlesList.length} Articles</h3>
-        <ul className="articles">
-          {articlesList.map((article) => {
-            return (
-              <li
-                key={article.article_id}
-                id={article.article_id}
-                className="lists"
-              >
-                <Link
-                  to={`articles/${article.article_id}`}
-                  className="article-p"
-                >
-                  {article.title}
-                </Link>
-                <p className="article-p">{article.author}</p>
-              </li>
-            );
-          })}
+        <ul className="news-ticker-h">
+          <li>
+            “Debugging” is like being the detective in a crime drama where you
+            are also the murderer.
+          </li>
+
+          <li>
+            An SQL query goes into a bar, walks up to two tables and asks: “Can
+            I join you?”
+          </li>
+
+          <li>!false (It's funny because it's true.)</li>
+
+          <li>
+            How many programmers does it take to change a light bulb? None,
+            that's a hardware problem
+          </li>
+          <li>
+            When I wrote this code, only God and I understood what I did. Now
+            only God knows
+          </li>
+          <li>
+            There are two ways to write error-free programs; only the third
+            works.
+          </li>
+          <li>
+            Credits to CODE HAS BUG for the ticker css and dcsl GuideSmiths for
+            the jokes
+          </li>
         </ul>
       </div>
-    );
-  }
+    </section>
+  );
 }
 
 export default Home;

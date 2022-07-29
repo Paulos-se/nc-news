@@ -2,9 +2,11 @@ import { useParams, Link } from "react-router-dom";
 import { useState, useEffect } from "react";
 
 import { useContext } from "react";
+
 import { UserContext } from "../components/User";
 
 import axios from "axios";
+import SortBy from "./SortBy";
 
 function Topic() {
   const { single_topic } = useParams();
@@ -43,6 +45,7 @@ function Topic() {
           <img id="avatar" src={user.avatar_url} alt="avatar" />
           Signed in as {user.username}
         </p>
+
         <h3>{topicArticlesList.length} Articles</h3>
         <ul className="articles">
           {topicArticlesList.map((article) => {
