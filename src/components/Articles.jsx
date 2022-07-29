@@ -2,14 +2,16 @@ import { useState, useEffect, useContext } from "react";
 
 import { Link, useSearchParams } from "react-router-dom";
 import axios from "axios";
+
+import Error from "./Error";
 import { UserContext } from "./User";
 import SortBy from "./SortBy";
 
 function Articles() {
   const [articlesList, setArticlesList] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
-  const [error, setError] = useState(false);
-  const [errorMessage, setErrorMessage] = useState("");
+  const [error, setError] = useState(null);
+
   const { user, setUser } = useContext(UserContext);
 
   const [query, setQuery] = useState({
@@ -33,19 +35,22 @@ function Articles() {
       .then((res) => {
         setArticlesList(res.data.articles);
         setIsLoading(false);
-        setError(false);
+        setError(null);
       })
       .catch((err) => {
-        setErrorMessage(err.message);
         setIsLoading(false);
-        setError(false);
+        console.log(err);
+        setError({
+          status: err.response.status,
+          message: err.response.data.message,
+        });
       });
   }, [search]);
 
   if (isLoading) {
     return <p className="loading">Loading Articles....</p>;
   } else if (error) {
-    return <p>{errorMessage}</p>;
+    return <Error status={error.status} message={error.message} />;
   } else {
     return (
       <div>

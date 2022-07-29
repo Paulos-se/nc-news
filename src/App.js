@@ -5,6 +5,7 @@ import Header from "./components/Header";
 import Articles from "./components/Articles";
 import Navigation from "./components/Navigation";
 import Topic from "./components/Topic";
+import Error from "./components/Error";
 
 import { UserContext } from "./components/User";
 
@@ -28,7 +29,8 @@ function App() {
           <Header />
           <Navigation />
           <Routes>
-            <Route path="/" element={<Home />} />
+            <Route path={"/"} element={<Home />} />
+            <Route path={"*"} element={<Error />} />
             <Route path="/articles" element={<Articles />} />
             <Route path={`/topics/:single_topic`} element={<Topic />} />
             <Route path="/articles/:article_id" element={<SingleArticle />} />
