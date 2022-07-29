@@ -63,10 +63,7 @@ function Articles() {
                 id={article.article_id}
                 className="lists"
               >
-                <Link
-                  to={`articles/${article.article_id}`}
-                  className="article-p"
-                >
+                <Link to={`${article.article_id}`} className="article-p">
                   {article.title}
                 </Link>
 
