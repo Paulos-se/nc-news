@@ -1,12 +1,18 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
+
 import NewComment from "./NewComment";
+import { UserContext } from "./User";
+import Delete from "./Delete";
+
+import { useContext } from "react";
 
 function Comments({ article }) {
   const [comments, setComments] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
+  const { user, setUser } = useContext(UserContext);
 
   useEffect(() => {
     setIsLoading(true);
@@ -24,7 +30,7 @@ function Comments({ article }) {
         setErrorMessage(err.message);
         setIsLoading(false);
       });
-  }, [article.article_id]);
+  }, [article.article_id, comments.length]);
   if (isLoading) {
     return <p>Loading ....</p>;
   } else if (error) {
@@ -52,6 +58,9 @@ function Comments({ article }) {
                 </p>
                 <p className="article-p">Author {comment.author}</p>
                 <p className="article-p">Vote {comment.votes}</p>
+                {comment.author === user.username ? (
+                  <Delete comment={comment} setComments={setComments} />
+                ) : null}
               </li>
             );
           })}
