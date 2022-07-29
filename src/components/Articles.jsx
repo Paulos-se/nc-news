@@ -69,7 +69,17 @@ function Articles() {
                 >
                   {article.title}
                 </Link>
-                <p className="article-p">{article.author}</p>
+
+                <p className="article-p">Article ID {article.article_id}</p>
+                <p className="article-p"> Author {article.author}</p>
+                <p className="article-p">Article topic {article.topic}</p>
+                <p className="article-p">
+                  Created at {article.created_at.slice(0, 10)}
+                  {"  "}
+                  {article.created_at.slice(11, 19)}
+                </p>
+                <p className="article-p">Comments {article.comment_count}</p>
+                <p className="article-p">Vote {article.votes}</p>
               </li>
             );
           })}
