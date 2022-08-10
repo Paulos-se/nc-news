@@ -45,7 +45,7 @@ function SingleArticle() {
       <main className="single-article">
         <p id="avatar-p">
           <img id="avatar" src={user.avatar_url} alt="avatar" />
-          Signed in as {user.username}
+          {user.username}
         </p>
         <h2>{article.title}</h2>
 

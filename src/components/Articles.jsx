@@ -56,7 +56,7 @@ function Articles() {
       <div>
         <p id="avatar-p">
           <img id="avatar" src={user.avatar_url} alt="avatar" />
-          Signed in as {user.username}
+          {user.username}
         </p>
         <SortBy query={query} setQuery={setQuery} setSearch={setSearch} />
         <h3>{articlesList.length} Articles</h3>

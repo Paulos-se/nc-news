@@ -166,11 +166,8 @@ label {
 
 .params {
   width: 50px;
-  height: 50px;
-  border: 1px solid black;
-
+  height: 100px;
   display: inline;
-  text-align: center;
 }
 
 .ticker-wrapper-h {
@@ -256,4 +253,8 @@ label {
 .comment-button {
   margin-top: -100px;
   width: 150px;
+}
+
+select {
+  margin: 20px;
 }

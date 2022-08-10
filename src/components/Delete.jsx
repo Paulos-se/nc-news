@@ -5,6 +5,7 @@ import { useState } from "react";
 import Error from "./Error";
 
 function Delete({ comment, setComments }) {
+  const [deleteDisable, setDeleteDisable] = useState(false);
   const [error, setError] = useState(null);
 
   function deleteComment() {
@@ -14,6 +15,7 @@ function Delete({ comment, setComments }) {
       )
       .then(() => {
         setError(null);
+        setDeleteDisable(false);
       })
       .catch((err) => {
         setError({
@@ -29,14 +31,21 @@ function Delete({ comment, setComments }) {
       );
       return filteredComments;
     });
+    setDeleteDisable(true);
   }
   if (error) {
     return <Error status={error.status} message={error.message} />;
   }
   return (
-    <button onClick={deleteComment} className="btn btn-danger">
-      Delete
-    </button>
+    <div>
+      {deleteDisable ? (
+        <h2 className="comment-posted">Comment delete successful</h2>
+      ) : (
+        <button onClick={deleteComment} className="btn btn-danger">
+          Delete
+        </button>
+      )}
+    </div>
   );
 }
 

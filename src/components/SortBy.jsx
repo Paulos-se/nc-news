@@ -13,9 +13,9 @@ function SortBy({ query, setQuery, setSearch }) {
     setSearch(query);
   }
   return (
-    <form onSubmit={sort} name="params">
-      <label htmlFor="sort_by">Sort by</label>
+    <form onSubmit={sort} className="params">
       <select onChange={handleInput} name="sort_by">
+        <option>Sort by</option>
         <option value="created_at">Created at</option>
         <option value="author">Author</option>
         <option value="created_at">Article ID</option>
@@ -23,8 +23,9 @@ function SortBy({ query, setQuery, setSearch }) {
         <option value="title">Title</option>
         <option value="comment_count">Number of comments</option>
       </select>
-      <label htmlFor="order">Order</label>
+
       <select name="order" onChange={handleInput}>
+        <option>order</option>
         <option value="DESC">DESC</option>
         <option value="ASC">ASC</option>
       </select>

@@ -29,7 +29,7 @@ function Topic() {
       });
   }, []);
   if (isLoading) {
-    return <p>Loading Topic....</p>;
+    return <p>Loading....</p>;
   } else if (error) {
     return <Error status={error.status} message={error.message} />;
   } else {
