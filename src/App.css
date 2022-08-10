@@ -258,3 +258,7 @@ label {
 select {
   margin: 20px;
 }
+
+.delete-comment {
+  background-color: RGB(238, 242, 245);
+}

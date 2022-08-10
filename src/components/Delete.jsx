@@ -37,7 +37,7 @@ function Delete({ comment, setComments }) {
     return <Error status={error.status} message={error.message} />;
   }
   return (
-    <div>
+    <div className="delete-comment">
       {deleteDisable ? (
         <h2 className="comment-posted">Comment delete successful</h2>
       ) : (
