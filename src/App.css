@@ -238,7 +238,7 @@ label {
 }
 
 #ticker {
-  margin-top: 300px;
+  margin-top: 500px;
 }
 
 #nc {
@@ -247,7 +247,11 @@ label {
 }
 
 .first-heading {
-  margin: 200px 600px;
+  margin: auto;
+  width: 50%;
+  /* border: 3px solid green; */
+  padding: 10px;
+  text-align: center;
 }
 
 .comment-button {
@@ -261,4 +265,9 @@ select {
 
 .delete-comment {
   background-color: RGB(238, 242, 245);
+}
+
+.home-div {
+  margin-top: 200px;
+  height: 250px;
 }

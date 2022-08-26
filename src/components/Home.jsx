@@ -3,11 +3,13 @@ import { Link } from "react-router-dom";
 function Home() {
   return (
     <section>
-      <Link to="/articles">
-        <h1 className="first-heading">
-          <span id="nc">NC</span> <span id="news">NEWS</span>
-        </h1>
-      </Link>
+      <div className="home-div">
+        <Link to="/articles">
+          <h1 className="first-heading">
+            <span id="nc">NC</span> <span id="news">NEWS</span>
+          </h1>
+        </Link>
+      </div>
 
       <div className="ticker-wrapper-h">
         <div className="heading">NC NEWS</div>
