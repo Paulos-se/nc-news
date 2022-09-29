@@ -1,4 +1,7 @@
-import { Link } from "react-router-dom";
+// import { Link } from "react-router-dom";
+import Container from "react-bootstrap/Container";
+import Nav from "react-bootstrap/Nav";
+import Navbar from "react-bootstrap/Navbar";
 
 import { useState, useEffect } from "react";
 
@@ -34,25 +37,31 @@ function Topic() {
     return <Error status={error.status} message={error.message} />;
   } else {
     return (
-      <nav>
-        <Link to="/" className="nav-links home-link">
-          Home
-        </Link>
-        <Link to="/articles" className="nav-links">
-          All articles
-        </Link>
-        {articleTopics.map((topic) => {
-          return (
-            <Link
-              to={`topics/${topic.slug}`}
-              key={topic.slug}
-              className="nav-links"
-            >
-              {`${topic.slug[0].toUpperCase()}${topic.slug.slice(1)}`}
-            </Link>
-          );
-        })}
-      </nav>
+      <Navbar expand="lg" className="color-nav">
+        <Navbar.Toggle aria-controls="basic-navbar-nav" />
+        <Navbar.Collapse id="basic-navbar-nav" className="color-nav">
+          <Nav className="me-auto color-nav">
+            <Nav.Link href="/" className="color-nav">
+              Home
+            </Nav.Link>
+            <Nav.Link href="/articles" className="color-nav">
+              All articles
+            </Nav.Link>
+
+            {articleTopics.map((topic) => {
+              return (
+                <Nav.Link
+                  href={`/topics/${topic.slug}`}
+                  key={topic.slug}
+                  className="color-nav"
+                >
+                  {`${topic.slug[0].toUpperCase()}${topic.slug.slice(1)}`}
+                </Nav.Link>
+              );
+            })}
+          </Nav>
+        </Navbar.Collapse>
+      </Navbar>
     );
   }
 }

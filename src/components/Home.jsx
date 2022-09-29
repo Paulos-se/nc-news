@@ -4,7 +4,7 @@ function Home() {
   return (
     <section>
       <div className="home-div">
-        <Link to="/articles">
+        <Link to="/articles" className="first-heading">
           <h1 className="first-heading">
             <span id="nc">NC</span> <span id="news">NEWS</span>
           </h1>

@@ -14,6 +14,8 @@ import SingleArticle from "./components/SingleArticle";
 
 import { useState } from "react";
 
+import "bootstrap/dist/css/bootstrap.min.css";
+
 function App() {
   const [user, setUser] = useState({
     username: "tickle122",
