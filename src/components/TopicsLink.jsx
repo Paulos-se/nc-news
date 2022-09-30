@@ -1,5 +1,5 @@
 // import { Link } from "react-router-dom";
-import Container from "react-bootstrap/Container";
+
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 
@@ -41,10 +41,14 @@ function Topic() {
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav" className="color-nav">
           <Nav className="me-auto color-nav">
-            <Nav.Link href="/" className="color-nav">
+            <Nav.Link href="/" className="color-nav" style={{ color: "white" }}>
               Home
             </Nav.Link>
-            <Nav.Link href="/articles" className="color-nav">
+            <Nav.Link
+              href="/articles"
+              className="color-nav"
+              style={{ color: "white" }}
+            >
               All articles
             </Nav.Link>
 
@@ -54,6 +58,7 @@ function Topic() {
                   href={`/topics/${topic.slug}`}
                   key={topic.slug}
                   className="color-nav"
+                  style={{ color: "white" }}
                 >
                   {`${topic.slug[0].toUpperCase()}${topic.slug.slice(1)}`}
                 </Nav.Link>
