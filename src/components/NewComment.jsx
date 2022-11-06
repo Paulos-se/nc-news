@@ -62,26 +62,29 @@ function NewComment({ article, comments, setComments }) {
         {formDisable ? (
           <h2 className="comment-posted">Comment post successful</h2>
         ) : (
-          <form onSubmit={handleSubmit} className="comment-form">
-            {user.username.length > 0 && <p>Signed in as {user.username}</p>}
-
-            <textarea
-              placeholder="Comment here ..."
-              className="input-comment"
-              onChange={handleInput}
-              value={commentToPost.body}
-              type="text"
-              name="body"
-              required
-            />
-            <button
-              type="submit"
-              className="btn btn-primary comment-button"
-              disabled={formDisable}
-            >
-              Post Comment!
-            </button>
-          </form>
+          user.username.length > 0 && (
+            <div>
+              <p>Signed in as {user.username}</p>
+              <form onSubmit={handleSubmit} className="comment-form">
+                <textarea
+                  placeholder="Comment here ..."
+                  className="input-comment"
+                  onChange={handleInput}
+                  value={commentToPost.body}
+                  type="text"
+                  name="body"
+                  required
+                />
+                <button
+                  type="submit"
+                  className="btn btn-primary comment-button"
+                  disabled={formDisable}
+                >
+                  Post Comment!
+                </button>
+              </form>
+            </div>
+          )
         )}
       </div>
     );
