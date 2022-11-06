@@ -3,6 +3,7 @@
   padding: 0;
   background-color: RGB(255, 255, 255);
   color: RGB(1, 51, 101);
+  position: relative;
 }
 
 .header {
@@ -19,6 +20,7 @@
   background-color: RGB(1, 51, 101);
   color: white;
   text-decoration: none;
+  text-shadow: 1px 1px red;
 }
 .articles {
   justify-content: space-between;
@@ -26,6 +28,7 @@
   display: flex;
   /* text-align: center; */
   list-style: none;
+  text-shadow: 0.2px 0.2px grey;
 }
 .lists {
   margin: 20px;
@@ -36,6 +39,28 @@
   box-shadow: 10px 10px RGB(1, 51, 101);
 }
 
+.login-image {
+  position: absolute;
+  width: 5%;
+  height: 95%;
+  border-radius: 50%;
+  left: 30px;
+}
+.logout-button {
+  position: absolute;
+  width: 5%;
+  height: 75%;
+  color: white;
+  border: none;
+  background-color: RGB(1, 51, 101);
+  text-shadow: 0.5px 0.5px red;
+  font-size: 1rem;
+  left: 100px;
+}
+.hide {
+  display: none;
+}
+
 a {
   margin: 0 5px 0 5px;
   text-decoration: none;
@@ -44,6 +69,7 @@ a {
 
 .nav-link {
   margin-left: 70px;
+  text-shadow: 1px 1px grey;
 }
 
 .home-link {
@@ -54,6 +80,11 @@ a {
 .color-nav {
   background-color: red;
   color: white;
+  font-weight: 500;
+}
+
+a.article-p {
+  font-weight: 600;
 }
 
 /* nav {
@@ -80,6 +111,11 @@ h2 {
 
 #avatar {
   width: 80px;
+  border-radius: 50%;
+}
+
+#users {
+  width: 15%;
   border-radius: 50%;
 }
 

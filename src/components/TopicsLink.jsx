@@ -1,5 +1,3 @@
-// import { Link } from "react-router-dom";
-
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 
@@ -43,6 +41,13 @@ function Topic() {
           <Nav className="me-auto color-nav">
             <Nav.Link href="/" className="color-nav" style={{ color: "white" }}>
               Home
+            </Nav.Link>
+            <Nav.Link
+              href="/users"
+              className="color-nav"
+              style={{ color: "white" }}
+            >
+              Users
             </Nav.Link>
             <Nav.Link
               href="/articles"

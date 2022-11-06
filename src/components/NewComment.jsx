@@ -1,5 +1,4 @@
 import { useState, useContext } from "react";
-import Button from "react-bootstrap/Button";
 
 import axios from "axios";
 
@@ -10,7 +9,7 @@ function NewComment({ article, comments, setComments }) {
   const [error, setError] = useState(null);
 
   const [formDisable, setFormDisable] = useState(false);
-  const { user, setUser } = useContext(UserContext);
+  const { user } = useContext(UserContext);
   const intialPost = {
     author: user.username,
     body: "",
@@ -64,7 +63,7 @@ function NewComment({ article, comments, setComments }) {
           <h2 className="comment-posted">Comment post successful</h2>
         ) : (
           <form onSubmit={handleSubmit} className="comment-form">
-            <p>Signed in as {user.username}</p>
+            {user.username.length > 0 && <p>Signed in as {user.username}</p>}
 
             <textarea
               placeholder="Comment here ..."

@@ -13,7 +13,7 @@ function Comments({ article }) {
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
 
-  const { user, setUser } = useContext(UserContext);
+  const { user } = useContext(UserContext);
 
   useEffect(() => {
     setIsLoading(true);

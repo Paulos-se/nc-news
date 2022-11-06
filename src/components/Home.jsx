@@ -10,7 +10,6 @@ function Home() {
           </h1>
         </Link>
       </div>
-
       <div className="ticker-wrapper-h">
         <div className="heading">NC NEWS</div>
 

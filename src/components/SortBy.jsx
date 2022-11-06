@@ -18,7 +18,7 @@ function SortBy({ query, setQuery, setSearch }) {
         <option>Sort by</option>
         <option value="created_at">Created at</option>
         <option value="author">Author</option>
-        <option value="created_at">Article ID</option>
+        <option value="article_id">Article ID</option>
         <option value="votes">votes</option>
         <option value="title">Title</option>
         <option value="comment_count">Number of comments</option>

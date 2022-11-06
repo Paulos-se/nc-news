@@ -1,10 +1,10 @@
-import { useState, useEffect, useContext } from "react";
+import { useState, useEffect } from "react";
 
 import { Link, useSearchParams } from "react-router-dom";
 import axios from "axios";
 
 import Error from "./Error";
-import { UserContext } from "./User";
+
 import SortBy from "./SortBy";
 
 function Articles() {
@@ -12,14 +12,11 @@ function Articles() {
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
 
-  const { user, setUser } = useContext(UserContext);
-
   const [query, setQuery] = useState({
     sort_by: "created_at",
     order: "DESC",
   });
   const [search, setSearch] = useSearchParams();
-
   const sort_by = search.get("sort_by");
   const order = search.get("order");
 
@@ -39,7 +36,6 @@ function Articles() {
       })
       .catch((err) => {
         setIsLoading(false);
-        console.log(err);
         setError({
           status: err.response.status,
           message: err.response.data.message,
@@ -54,10 +50,6 @@ function Articles() {
   } else {
     return (
       <div>
-        <p id="avatar-p">
-          <img id="avatar" src={user.avatar_url} alt="avatar" />
-          {user.username}
-        </p>
         <SortBy query={query} setQuery={setQuery} setSearch={setSearch} />
         <h3>{articlesList.length} Articles</h3>
         <ul className="articles">
