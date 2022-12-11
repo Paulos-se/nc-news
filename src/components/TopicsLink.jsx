@@ -15,7 +15,7 @@ function Topic() {
   useEffect(() => {
     setIsLoading(true);
     axios
-      .get("https://nc-news-pa.herokuapp.com/api/topics")
+      .get("https://nc-news-paulos.onrender.com/api/topics")
       .then((res) => {
         setArticleTopics(res.data.topics);
         setIsLoading(false);

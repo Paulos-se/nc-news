@@ -29,7 +29,7 @@ function NewComment({ article, comments, setComments }) {
 
     axios
       .post(
-        `https://nc-news-pa.herokuapp.com/api/articles/${article.article_id}/comments`,
+        `https://nc-news-paulos.onrender.com/api/articles/${article.article_id}/comments`,
         commentToPost
       )
       .then(() => {

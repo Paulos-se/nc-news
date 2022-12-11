@@ -18,7 +18,7 @@ function SingleArticle() {
 
   useEffect(() => {
     axios
-      .get(`https://nc-news-pa.herokuapp.com/api/articles/${article_id}`)
+      .get(`https://nc-news-paulos.onrender.com/api/articles/${article_id}`)
       .then((res) => {
         setArticle(res.data.article);
         setArticleVote(res.data.article.votes);

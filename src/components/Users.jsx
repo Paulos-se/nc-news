@@ -16,7 +16,7 @@ function Users() {
   useEffect(() => {
     setIsLoading(true);
     axios
-      .get("https://nc-news-pa.herokuapp.com/api/users")
+      .get("https://nc-news-paulos.onrender.com/api/users")
       .then((result) => {
         setData(result.data.users);
         setIsLoading(false);

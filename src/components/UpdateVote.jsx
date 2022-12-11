@@ -23,7 +23,7 @@ function UpdateVote({ vote, setVote, setArticle, article }) {
   function patch(singleVote) {
     axios
       .patch(
-        `https://nc-news-pa.herokuapp.com/api/articles/${article.article_id}`,
+        `https://nc-news-paulos.onrender.com/api/articles/${article.article_id}`,
         { inc_votes: singleVote }
       )
       .then((res) => {

@@ -15,7 +15,7 @@ function Topic() {
     setIsLoading(true);
     axios
       .get(
-        `https://nc-news-pa.herokuapp.com/api/articles?topic=${single_topic}`
+        `https://nc-news-paulos.onrender.com/api/articles?topic=${single_topic}`
       )
       .then((res) => {
         setTopicArticlesList(res.data.articles);

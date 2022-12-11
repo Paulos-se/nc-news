@@ -11,7 +11,8 @@ function Delete({ comment, setComments }) {
   function deleteComment() {
     axios
       .delete(
-        `https://nc-news-pa.herokuapp.com/api/comments/${comment.comment_id}`
+        // `https://nc-news-pa.herokuapp.com/api/comments/${comment.comment_id}`
+        `https://nc-news-paulos.onrender.com/api/comments/${comment.comment_id}`
       )
       .then(() => {
         setError(null);

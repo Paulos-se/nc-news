@@ -19,7 +19,8 @@ function Comments({ article }) {
     setIsLoading(true);
     axios
       .get(
-        `https://nc-news-pa.herokuapp.com/api/articles/${article.article_id}/comments`
+        // `https://nc-news-pa.herokuapp.com/api/articles/${article.article_id}/comments`
+        `https://nc-news-paulos.onrender.com/api/articles/${article.article_id}/comments`
       )
       .then((res) => {
         setComments(res.data.comments);

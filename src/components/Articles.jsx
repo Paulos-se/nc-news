@@ -23,7 +23,8 @@ function Articles() {
   useEffect(() => {
     setIsLoading(true);
     axios
-      .get("https://nc-news-pa.herokuapp.com/api/articles", {
+      // .get("https://nc-news-pa.herokuapp.com/api/articles", {
+      .get("https://nc-news-paulos.onrender.com/api/articles", {
         params: {
           sort_by: sort_by,
           order: order,
